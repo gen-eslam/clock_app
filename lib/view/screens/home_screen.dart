@@ -34,7 +34,6 @@ class HomeScreen extends GetWidget<HomePageController> {
             ),
             Expanded(
               child: GetBuilder<HomePageController>(builder: (logic) {
-                print("status 1");
                 return Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,

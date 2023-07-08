@@ -18,7 +18,7 @@ class AlarmCard extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: alarmInfo.gradientColors.last.withOpacity(0.4),
+            color: GradientTemplate.gradientTemplate[alarmInfo.gradientColors].colors.last.withOpacity(0.4),
             blurRadius: 8.r,
             spreadRadius: 2,
             offset: Offset(4,4),
@@ -26,7 +26,7 @@ class AlarmCard extends StatelessWidget {
           ),
         ],
         gradient:  LinearGradient(
-          colors: alarmInfo.gradientColors,
+          colors: GradientTemplate.gradientTemplate[alarmInfo.gradientColors].colors,
           begin: AlignmentDirectional.centerStart,
           end: AlignmentDirectional.centerEnd,
         ),
@@ -46,7 +46,7 @@ class AlarmCard extends StatelessWidget {
                 width: 8.w,
               ),
               Text(
-                alarmInfo.description,
+                alarmInfo.title,
                 style: TextStyle(color: Colors.white),
               ),
               Spacer(),

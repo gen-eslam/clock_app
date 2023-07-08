@@ -1,24 +1,31 @@
+
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:clock_app/utils/bindings/binding.dart';
-import 'package:clock_app/utils/constans_string.dart';
+import 'package:clock_app/utils/constans/constans_string.dart';
 import 'package:clock_app/utils/routes/routes.dart';
+import 'package:clock_app/utils/services/database_helper.dart';
+import 'package:clock_app/utils/services/loacl_notification.dart';
 import 'package:clock_app/utils/theme/theme_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]);
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  NotificationService.initializeNotification();
+  NotificationService.requestNotificationPermission();
+  // DatabaseHelper.instance.database;
+
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

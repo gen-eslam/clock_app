@@ -1,5 +1,5 @@
 import 'package:clock_app/controllers/home_page_controller.dart';
-import 'package:clock_app/utils/constans_string.dart';
+import 'package:clock_app/utils/constans/constans_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -29,16 +29,25 @@ class ClockPage extends GetWidget<HomePageController> {
             children: [
               Obx(
                     () =>
-                    Text(
-                      controller.formattedTime.value,
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 64.sp),
+                    RichText(
+
+                      text: TextSpan(
+                        style: TextStyle(
+                            color: Colors.white, fontSize: 64.sp),
+                        text: controller.formattedTime.value.split(" ").first,
+                        children: [
+                          TextSpan(
+                            text: " ${controller.formattedTime.value.split(" ").last}",
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 40.sp),                          ),
+                        ]
+                      ),
                     ),
               ),
               Obx(
                     () =>
                     Text(
-                      "   ${controller.formattedDate.value}",
+                      "${controller.formattedDate.value}",
                       style: TextStyle(
                           color: Colors.white, fontSize: 18.sp),
                     ),
@@ -60,7 +69,7 @@ class ClockPage extends GetWidget<HomePageController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Timezone",
+                ConstanceString.timeZone,
                 style:
                 TextStyle(color: Colors.white, fontSize: 24.sp),
               ),
