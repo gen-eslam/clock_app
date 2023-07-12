@@ -1,10 +1,14 @@
 import 'package:clock_app/model/alarm_info.dart';
+import 'package:clock_app/view/widgets/time_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
+import '../../controllers/alarm_controller.dart';
 import '../../utils/theme/custom_colors.dart';
 
-class AlarmCard extends StatelessWidget {
+class AlarmCard extends GetView<AlarmController> {
   final AlarmInfo alarmInfo;
 
   const AlarmCard({Key? key, required this.alarmInfo}) : super(key: key);
@@ -13,20 +17,22 @@ class AlarmCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsetsDirectional.only(bottom: 32.r,end: 20.r),
-      padding:const EdgeInsets.symmetric(horizontal: 16, vertical: 8).r,
+      margin: EdgeInsetsDirectional.only(bottom: 32.r, end: 20.r),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8).r,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: GradientTemplate.gradientTemplate[alarmInfo.gradientColors].colors.last.withOpacity(0.4),
+            color: GradientTemplate
+                .gradientTemplate[alarmInfo.gradientColors].colors.last
+                .withOpacity(0.4),
             blurRadius: 8.r,
             spreadRadius: 2,
-            offset: Offset(4,4),
-
+            offset: Offset(4, 4),
           ),
         ],
-        gradient:  LinearGradient(
-          colors: GradientTemplate.gradientTemplate[alarmInfo.gradientColors].colors,
+        gradient: LinearGradient(
+          colors: GradientTemplate
+              .gradientTemplate[alarmInfo.gradientColors].colors,
           begin: AlignmentDirectional.centerStart,
           end: AlignmentDirectional.centerEnd,
         ),
@@ -66,16 +72,19 @@ class AlarmCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '07:00 AM',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.w700,
-                ),
+              TimeFormat(
+                dateTime:
+                    DateFormat.jm().format(alarmInfo.alarmDataTime).toString(),
+                fontSize: 24,
+                fontWeight: FontWeight.w700,
               ),
-              Icon(Icons.keyboard_arrow_down,
-                  color: Colors.white, size: 30.r),
+              GestureDetector(
+                onTap: () {
+                  controller.deleteAlarm(alarmInfo.id!);
+                },
+                child:
+                    Icon(Icons.delete_forever, color: Colors.white, size: 30.r),
+              ),
             ],
           ),
         ],

@@ -27,7 +27,7 @@ class DatabaseHelper {
 
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
-          create table $ConstanceString.tableName ( 
+          create table ${ConstanceString.tableName} ( 
           ${ConstanceString.columnId} integer primary key autoincrement, 
           ${ConstanceString.columnTitle} text not null,
           ${ConstanceString.columnDateTime} text not null,
@@ -37,7 +37,25 @@ class DatabaseHelper {
   }
 
   void insertAlarm(AlarmInfo alarmInfo) async {
-    var result = await  _database?.insert(ConstanceString.tableName, alarmInfo.toJson());
+    var result = await _database?.insert(
+        ConstanceString.tableName, alarmInfo.toJson());
     print(result);
+  }
+
+  Future<List<AlarmInfo>> getAlarms() async {
+    List<Map<String, Object?>> map = await _database!.query(
+        ConstanceString.tableName);
+
+    return List.generate(map.length, (index) {
+      print(map[index].toString());
+      return AlarmInfo.fromJson(map[index]);
+    }
+    );
+
+
+  }
+
+  Future<void> deleteAlarm(int id) async{
+    await _database!.delete(ConstanceString.tableName,where: "${ConstanceString.columnId} =?" ,whereArgs: [id]);
   }
 }

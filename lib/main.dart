@@ -17,7 +17,7 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   NotificationService.initializeNotification();
   NotificationService.requestNotificationPermission();
-  // DatabaseHelper.instance.database;
+   DatabaseHelper.instance.database;
 
 
   runApp(const MyApp());

@@ -18,18 +18,18 @@ class AlarmInfo {
       this.gradientColors = 0});
 
   factory AlarmInfo.fromJson(Map<String, dynamic> json) => AlarmInfo(
-        alarmDataTime: json[ConstanceString.columnDateTime],
+        alarmDataTime: DateTime.parse(json[ConstanceString.columnDateTime]),
         title: json[ConstanceString.columnTitle],
         id: json[ConstanceString.columnId],
-        gradientColors: json[ConstanceString.columnColorIndex],
-        isPending: json[ConstanceString.columnPending],
+        gradientColors: json[ConstanceString.columnColorIndex] ,
+        isPending: json[ConstanceString.columnPending] ==0? false:true,
       );
 
   toJson() {
     return {
       ConstanceString.columnId: id,
       ConstanceString.columnTitle: title,
-      ConstanceString.columnDateTime: alarmDataTime,
+      ConstanceString.columnDateTime: alarmDataTime.toString(),
       ConstanceString.columnPending: isPending,
       ConstanceString.columnColorIndex: gradientColors,
     };

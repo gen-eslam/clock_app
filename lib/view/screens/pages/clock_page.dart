@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/clock_view.dart';
+import '../../widgets/time_format.dart';
 
 class ClockPage extends GetWidget<HomePageController> {
   const ClockPage({Key? key}) : super(key: key);
@@ -28,26 +29,12 @@ class ClockPage extends GetWidget<HomePageController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Obx(
-                    () =>
-                    RichText(
-
-                      text: TextSpan(
-                        style: TextStyle(
-                            color: Colors.white, fontSize: 64.sp),
-                        text: controller.formattedTime.value.split(" ").first,
-                        children: [
-                          TextSpan(
-                            text: " ${controller.formattedTime.value.split(" ").last}",
-                            style: TextStyle(
-                                color: Colors.white, fontSize: 40.sp),                          ),
-                        ]
-                      ),
-                    ),
+                    () =>TimeFormat(dateTime: controller.formattedTime.value,fontSize: 64,fontWeight: FontWeight.normal),
               ),
               Obx(
                     () =>
                     Text(
-                      "${controller.formattedDate.value}",
+                      controller.formattedDate.value,
                       style: TextStyle(
                           color: Colors.white, fontSize: 18.sp),
                     ),

@@ -1,7 +1,6 @@
 import 'package:clock_app/controllers/home_page_controller.dart';
 import 'package:clock_app/model/static_data.dart';
 import 'package:clock_app/utils/constans/constans_string.dart';
-import 'package:clock_app/utils/theme/theme_app.dart';
 import 'package:clock_app/view/widgets/alarm_card.dart';
 import 'package:clock_app/view/widgets/bottom_sheet.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -9,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/alarm_controller.dart';
 import '../../../utils/constans/constance_image.dart';
-import '../../../utils/services/loacl_notification.dart';
 import '../../../utils/theme/custom_colors.dart';
 
-class AlarmPage extends GetWidget<HomePageController> {
+class AlarmPage extends GetWidget<AlarmController> {
   const AlarmPage({Key? key}) : super(key: key);
 
   @override
@@ -33,11 +32,18 @@ class AlarmPage extends GetWidget<HomePageController> {
         Expanded(
           flex: 8,
           child: ListView(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
+             physics: const BouncingScrollPhysics(),
             children: [
-              ...List.generate(alarmInfo.length,
-                  (index) => AlarmCard(alarmInfo: alarmInfo[index])),
+              GetBuilder<AlarmController>(builder: (logic) {
+                return ListView.builder(
+                  shrinkWrap: true,
+
+                   physics: const NeverScrollableScrollPhysics(),
+                  itemCount: logic.alarmInfo.length,
+                  itemBuilder: (context, index) =>
+                      AlarmCard(alarmInfo: logic.alarmInfo[index]),
+                );
+              }),
               Container(
                 margin: EdgeInsetsDirectional.only(bottom: 32.r, end: 20.r),
                 child: GestureDetector(
@@ -50,10 +56,12 @@ class AlarmPage extends GetWidget<HomePageController> {
                             borderRadius: BorderRadius.vertical(
                                 top: const Radius.circular(24).r)),
                         backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
+                        Theme
+                            .of(context)
+                            .scaffoldBackgroundColor,
                         context: context,
                         builder: (context) {
-                          return const CustomBottomSheet();
+                          return CustomBottomSheet();
                         });
                   },
                   child: DottedBorder(
@@ -65,11 +73,13 @@ class AlarmPage extends GetWidget<HomePageController> {
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8)
+                          horizontal: 16, vertical: 8)
                           .r,
                       decoration: BoxDecoration(
                         color: CustomColors.clockBG,
-                        borderRadius: BorderRadius.circular(20).r,
+                        borderRadius: BorderRadius
+                            .circular(20)
+                            .r,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -92,9 +102,19 @@ class AlarmPage extends GetWidget<HomePageController> {
             ],
           ),
         ),
+        // Expanded(
+        //   flex: 8,
+        //   child: ListView(
+        //     shrinkWrap: true,
+        //     physics: const BouncingScrollPhysics(),
+        //     children: [
+        //       ...List.generate(alarmInfo.length,
+        //           (index) => AlarmCard(alarmInfo: controller.alarmInfo[index])),
+        //
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }
-
-
 }
