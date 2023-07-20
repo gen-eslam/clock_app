@@ -36,26 +36,21 @@ class DatabaseHelper {
         ''');
   }
 
-  void insertAlarm(AlarmInfo alarmInfo) async {
-    var result = await _database?.insert(
-        ConstanceString.tableName, alarmInfo.toJson());
-    print(result);
+  Future<int?> insertAlarm(AlarmInfo alarmInfo) async {
+    return await _database?.insert(ConstanceString.tableName, alarmInfo.toJson());
   }
 
   Future<List<AlarmInfo>> getAlarms() async {
-    List<Map<String, Object?>> map = await _database!.query(
-        ConstanceString.tableName);
+    List<Map<String, Object?>> map =
+        await _database!.query(ConstanceString.tableName);
 
     return List.generate(map.length, (index) {
-      print(map[index].toString());
       return AlarmInfo.fromJson(map[index]);
-    }
-    );
-
-
+    });
   }
 
-  Future<void> deleteAlarm(int id) async{
-    await _database!.delete(ConstanceString.tableName,where: "${ConstanceString.columnId} =?" ,whereArgs: [id]);
+  Future<void> deleteAlarm(int id) async {
+    await _database!.delete(ConstanceString.tableName,
+        where: "${ConstanceString.columnId} =?", whereArgs: [id]);
   }
 }

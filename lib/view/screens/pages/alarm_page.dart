@@ -1,8 +1,6 @@
-import 'package:clock_app/controllers/home_page_controller.dart';
-import 'package:clock_app/model/static_data.dart';
 import 'package:clock_app/utils/constans/constans_string.dart';
+import 'package:clock_app/utils/routes/routes.dart';
 import 'package:clock_app/view/widgets/alarm_card.dart';
-import 'package:clock_app/view/widgets/bottom_sheet.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,13 +30,12 @@ class AlarmPage extends GetWidget<AlarmController> {
         Expanded(
           flex: 8,
           child: ListView(
-             physics: const BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             children: [
               GetBuilder<AlarmController>(builder: (logic) {
                 return ListView.builder(
                   shrinkWrap: true,
-
-                   physics: const NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: logic.alarmInfo.length,
                   itemBuilder: (context, index) =>
                       AlarmCard(alarmInfo: logic.alarmInfo[index]),
@@ -48,21 +45,8 @@ class AlarmPage extends GetWidget<AlarmController> {
                 margin: EdgeInsetsDirectional.only(bottom: 32.r, end: 20.r),
                 child: GestureDetector(
                   onTap: () {
-                    showModalBottomSheet(
-                        useRootNavigator: true,
-                        useSafeArea: true,
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                                top: const Radius.circular(24).r)),
-                        backgroundColor:
-                        Theme
-                            .of(context)
-                            .scaffoldBackgroundColor,
-                        context: context,
-                        builder: (context) {
-                          return CustomBottomSheet();
-                        });
+                    //todo navigation
+                    Get.toNamed(Routes.setAlarm);
                   },
                   child: DottedBorder(
                     strokeWidth: 3,
@@ -73,13 +57,11 @@ class AlarmPage extends GetWidget<AlarmController> {
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8)
+                              horizontal: 16, vertical: 8)
                           .r,
                       decoration: BoxDecoration(
                         color: CustomColors.clockBG,
-                        borderRadius: BorderRadius
-                            .circular(20)
-                            .r,
+                        borderRadius: BorderRadius.circular(20).r,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

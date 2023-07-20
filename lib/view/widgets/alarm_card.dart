@@ -27,7 +27,7 @@ class AlarmCard extends GetView<AlarmController> {
                 .withOpacity(0.4),
             blurRadius: 8.r,
             spreadRadius: 2,
-            offset: Offset(4, 4),
+            offset: const Offset(4, 4),
           ),
         ],
         gradient: LinearGradient(
@@ -53,9 +53,9 @@ class AlarmCard extends GetView<AlarmController> {
               ),
               Text(
                 alarmInfo.title,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
-              Spacer(),
+              const Spacer(),
               Switch(
                 value: true,
                 onChanged: (value) {},
@@ -63,7 +63,7 @@ class AlarmCard extends GetView<AlarmController> {
               ),
             ],
           ),
-          Text(
+          const Text(
             'Mon-Fri',
             style: TextStyle(
               color: Colors.white,

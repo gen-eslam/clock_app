@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 
 import '../utils/constans/constans_string.dart';
-import '../utils/theme/custom_colors.dart';
 
 class AlarmInfo {
   int? id;

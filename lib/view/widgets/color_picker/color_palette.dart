@@ -19,7 +19,7 @@ class _ColorPaletteState extends State<ColorPalette> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         ...List.generate(GradientTemplate.gradientTemplate.length, (index) =>
             colorButton(index: index,)),
@@ -38,7 +38,6 @@ class _ColorPaletteState extends State<ColorPalette> {
       child: Container(
         height: 30.r,
         width: 30.r,
-        margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           border: Border.all(
               color:selectedIndex == index ?Colors.white: Colors.transparent,

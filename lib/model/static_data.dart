@@ -29,11 +29,11 @@ List<MenuInfo> menuItems = [
       imageSource: ConstanceImage.stopWatchImg),
 ];
 
-List<Widget> pages = const [
-  ClockPage(),
-  AlarmPage(),
-  TimerPage(),
-  StopwatchPage()
+List<Widget> pages =  [
+  const ClockPage(),
+  const AlarmPage(),
+  const TimerPage(),
+  const StopwatchPage()
 ];
 
 ///test data

@@ -1,10 +1,9 @@
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:clock_app/utils/bindings/binding.dart';
 import 'package:clock_app/utils/constans/constans_string.dart';
 import 'package:clock_app/utils/routes/routes.dart';
 import 'package:clock_app/utils/services/database_helper.dart';
-import 'package:clock_app/utils/services/loacl_notification.dart';
+import 'package:clock_app/utils/services/notificatio_service.dart';
 import 'package:clock_app/utils/theme/theme_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
