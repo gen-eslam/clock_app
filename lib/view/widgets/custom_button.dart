@@ -1,5 +1,6 @@
 import 'package:clock_app/controllers/home_page_controller.dart';
 import 'package:clock_app/model/menu_info.dart';
+import 'package:clock_app/utils/services/notificatio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class CustomButton extends GetWidget<HomePageController> {
       return MaterialButton(
         onPressed: () {
           controller.updateIndex(index);
+          NotificationService.listOfSchedule();
         },
         color: controller.currentIndex == index
             ? CustomColors.menuBackgroundColor
@@ -25,9 +27,8 @@ class CustomButton extends GetWidget<HomePageController> {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusDirectional.only(
-            topEnd: const Radius.circular(30).r,
-            bottomEnd: const Radius.circular(30).r
-          ),
+              topEnd: const Radius.circular(30).r,
+              bottomEnd: const Radius.circular(30).r),
         ),
         padding: const EdgeInsets.symmetric(vertical: 16).r,
         child: Column(

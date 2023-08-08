@@ -23,7 +23,7 @@ class _DayState extends State<Day> {
         });
       },
       child: CircleAvatar(
-        radius: 22.r,
+        radius: 20.r,
         backgroundColor: widget.dayInWeek.isSelected
             ? CustomColors.minHandStatColor
             : CustomColors.clockBG,

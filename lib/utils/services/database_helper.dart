@@ -1,6 +1,6 @@
 import 'package:clock_app/utils/constans/constans_string.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../../model/alarm_info.dart';
 
@@ -31,13 +31,14 @@ class DatabaseHelper {
           ${ConstanceString.columnId} integer primary key autoincrement, 
           ${ConstanceString.columnTitle} text not null,
           ${ConstanceString.columnDateTime} text not null,
-          ${ConstanceString.columnPending} integer,
+          ${ConstanceString.columnRepeat} integer,
           ${ConstanceString.columnColorIndex} integer)
         ''');
   }
 
   Future<int?> insertAlarm(AlarmInfo alarmInfo) async {
-    return await _database?.insert(ConstanceString.tableName, alarmInfo.toJson());
+    return await _database?.insert(
+        ConstanceString.tableName, alarmInfo.toJson());
   }
 
   Future<List<AlarmInfo>> getAlarms() async {
@@ -47,6 +48,11 @@ class DatabaseHelper {
     return List.generate(map.length, (index) {
       return AlarmInfo.fromJson(map[index]);
     });
+  }
+
+  Future<void> updateAlarm(AlarmInfo alarmInfo) async {
+    await _database!.update(ConstanceString.tableName, alarmInfo.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<void> deleteAlarm(int id) async {

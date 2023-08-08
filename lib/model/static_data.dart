@@ -29,7 +29,7 @@ List<MenuInfo> menuItems = [
       imageSource: ConstanceImage.stopWatchImg),
 ];
 
-List<Widget> pages =  [
+List<Widget> pages = [
   const ClockPage(),
   const AlarmPage(),
   const TimerPage(),
@@ -38,8 +38,24 @@ List<Widget> pages =  [
 
 ///test data
 List<AlarmInfo> alarmInfo = [
-   AlarmInfo(title: "fares",alarmDataTime: DateTime.now(),gradientColors: 0,isPending: true),
-   AlarmInfo(title: "fares",alarmDataTime: DateTime.now(),gradientColors:1,isPending: false),
-   AlarmInfo(title: "fares",alarmDataTime: DateTime.now(),gradientColors: 2,isPending: true ),
-   AlarmInfo(title: "fares",alarmDataTime: DateTime.now(),gradientColors: 0,isPending: true),
+  AlarmInfo(
+      title: "fares",
+      alarmDataTime: DateTime.now(),
+      gradientColors: 0,
+      isRepeating: true),
+  AlarmInfo(
+      title: "fares",
+      alarmDataTime: DateTime.now(),
+      gradientColors: 1,
+      isRepeating: false),
+  AlarmInfo(
+      title: "fares",
+      alarmDataTime: DateTime.now(),
+      gradientColors: 2,
+      isRepeating: true),
+  AlarmInfo(
+      title: "fares",
+      alarmDataTime: DateTime.now(),
+      gradientColors: 0,
+      isRepeating: true),
 ];

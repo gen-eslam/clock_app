@@ -56,11 +56,13 @@ class AlarmCard extends GetView<AlarmController> {
                 style: const TextStyle(color: Colors.white),
               ),
               const Spacer(),
-              Switch(
-                value: true,
-                onChanged: (value) {},
-                activeColor: Colors.white,
-              ),
+              GetBuilder<AlarmController>(builder: (logic) {
+                return Switch(
+                  value: alarmInfo.isRepeating,
+                  onChanged: (value) {},
+                  activeColor: Colors.white,
+                );
+              }),
             ],
           ),
           const Text(

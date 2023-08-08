@@ -88,7 +88,8 @@ class SetAlarm extends GetWidget<SetAlarmController> {
                                       decoration: BoxDecoration(
                                         color: CustomColors.pageBackgroundColor,
                                         border: Border.all(
-                                          color: controller.repeatIndex == index
+                                          color: controller.repeatIndex.value ==
+                                                  index
                                               ? Colors.white
                                               : Colors.transparent,
                                           width: 2.r,
@@ -108,6 +109,51 @@ class SetAlarm extends GetWidget<SetAlarmController> {
                                 )),
                       ],
                     ),
+                    Obx(() {
+                      return Visibility(
+                        visible: controller.repeatIndex.value == 1 &&
+                            controller.dateValue.value.isAfter(DateTime.now()),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ...List.generate(
+                                  controller.onceChooseList.length,
+                                  (index) => GestureDetector(
+                                        onTap: () {
+                                          controller.onceChoose.value = index;
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: CustomColors
+                                                .pageBackgroundColor,
+                                            border: Border.all(
+                                              color:
+                                                  controller.onceChoose.value ==
+                                                          index
+                                                      ? Colors.white
+                                                      : Colors.transparent,
+                                              width: 2.r,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                          ),
+                                          padding: EdgeInsets.all(10.r),
+                                          child: Text(
+                                              controller.onceChooseList[index],
+                                              style: TextStyle(
+                                                  color: CustomColors
+                                                      .primaryTextColor,
+                                                  letterSpacing: 2.r,
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                      )),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
                     Obx(() {
                       return Visibility(
                         visible: controller.repeatIndex.value == 3,
@@ -131,7 +177,16 @@ class SetAlarm extends GetWidget<SetAlarmController> {
               flex: 2,
               child: FloatingActionButton.extended(
                 onPressed: () {
-                  controller.setOnceAlarm();
+                  if (controller.repeatIndex.value == 0) {
+                    controller.setDailyAlarm();
+                  } else if (controller.repeatIndex.value == 1) {
+                    controller.setOnceAlarm();
+                  } else if (controller.repeatIndex.value == 2) {
+                    controller.setOnceAlarm();
+                  } else {
+                    controller.setCustomAlarm();
+                  }
+
                   Get.back();
                 },
                 icon: const Icon(Icons.alarm),
@@ -146,3 +201,5 @@ class SetAlarm extends GetWidget<SetAlarmController> {
     );
   }
 }
+//controller.repeatIndex == 1 &&
+//                             controller.dateValue.value.isAfter(DateTime.now()),

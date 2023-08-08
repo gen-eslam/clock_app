@@ -1,26 +1,25 @@
-
 import '../utils/constans/constans_string.dart';
 
 class AlarmInfo {
   int? id;
   DateTime alarmDataTime;
   String title;
-  bool isPending;
+  bool isRepeating;
   int gradientColors;
 
   AlarmInfo(
       {this.id,
       required this.alarmDataTime,
       required this.title,
-      this.isPending = false,
+      this.isRepeating = false,
       this.gradientColors = 0});
 
   factory AlarmInfo.fromJson(Map<String, dynamic> json) => AlarmInfo(
         alarmDataTime: DateTime.parse(json[ConstanceString.columnDateTime]),
         title: json[ConstanceString.columnTitle],
         id: json[ConstanceString.columnId],
-        gradientColors: json[ConstanceString.columnColorIndex] ,
-        isPending: json[ConstanceString.columnPending] ==0? false:true,
+        gradientColors: json[ConstanceString.columnColorIndex],
+        isRepeating: json[ConstanceString.columnRepeat] == 0 ? false : true,
       );
 
   toJson() {
@@ -28,7 +27,7 @@ class AlarmInfo {
       ConstanceString.columnId: id,
       ConstanceString.columnTitle: title,
       ConstanceString.columnDateTime: alarmDataTime.toString(),
-      ConstanceString.columnPending: isPending,
+      ConstanceString.columnRepeat: isRepeating ? 1 : 0,
       ConstanceString.columnColorIndex: gradientColors,
     };
   }
